@@ -1,90 +1,43 @@
 import 'package:flutter/material.dart';
-void main()
-{
-  runApp(
-      MyApp()
-  );
-}
-class MyApp extends StatelessWidget {
+import 'package:audioplayers/audio_cache.dart';
+
+void main() => runApp(XylophoneApp());
+
+class XylophoneApp extends StatelessWidget {
+  void playSound(int soundNumber)
+  {
+    final player = AudioCache();
+    player.play('note$soundNumber.wav');
+  }
+  Expanded buildKey({Color color, int soundNumber})
+  {
+    return Expanded(
+      child: FlatButton(
+        color: color,
+        onPressed: () {
+          playSound(soundNumber);
+        },
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.black,
         body: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: AssetImage('images/sid.jpg'),
-                ),
-                Text(
-                  'Siddhant Mittal',
-                  style: TextStyle(
-                    fontSize: 35.0,
-                    fontFamily: 'Pacifico',
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'APP DEVELOPER',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.teal.shade100,
-                    fontFamily: 'Source Sans Pro',
-                    letterSpacing: 2.5,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                  width: 150.0,
-                  child: Divider(
-                    color: Colors.teal.shade100,
-                  ),
-                ),
-                Card(
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                    child: ListTile(
-                      leading:
-                      Icon(
-                        Icons.phone,
-                        color: Colors.teal.shade900,
-                      ),
-                      title:
-                      Text(
-                        '+918588811824',
-                        style: TextStyle(
-                          color: Colors.teal.shade900,
-                          fontFamily: 'Source Sans Pro',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                ),
-                Card(
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  child: ListTile(
-                    leading:
-                    Icon(
-                      Icons.mail,
-                      color: Colors.teal.shade900,
-                    ),
-                    title:
-                    Text(
-                      'sidmit2001@gmail.com',
-                      style: TextStyle(
-                        color: Colors.teal.shade900,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize:15.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget> [
+              buildKey(color: Colors.red, soundNumber: 1),
+              buildKey(color: Colors.orange, soundNumber: 2),
+              buildKey(color: Colors.yellow, soundNumber: 3),
+              buildKey(color: Colors.green, soundNumber: 4),
+              buildKey(color: Colors.teal, soundNumber: 5),
+              buildKey(color: Colors.blue, soundNumber: 6),
+              buildKey(color: Colors.purple, soundNumber: 7),
+
+    ]),
         ),
       ),
     );
